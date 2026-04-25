@@ -68,6 +68,7 @@ CYPHER-HR is built as an enterprise-grade Single Page Application (SPA), rivalin
 - **Granular Leave Controls:** Create custom leave policies (e.g., Sick, Casual, Maternity) and set exact monthly limits.
 - **Direct Allowance Adjustments:** Manually increment or decrement individual employee leave balances when necessary.
 - **Automated Monthly Resets:** A built-in backend Cron Job automatically refreshes all enabled leave allowances at midnight on the 1st of every month.
+- **Bulk Employee Import:** Need to onboard 500 people? Upload an entire roster at once via Excel (`.xls`, `.xlsx`) or `.csv`. A pre-formatted `CYPHER_HR_Employee_Template.csv` is included directly in the repository for quick, seamless mass-onboarding. Files are parsed instantly in the browser using the blazing-fast SheetJS library.
 </details>
 
 <details open>
@@ -88,6 +89,33 @@ CYPHER-HR is built as an enterprise-grade Single Page Application (SPA), rivalin
 - **Dynamic Iconography:** Leveraging the highly optimized `@thesvg/icons` library to fetch and render crisp vector graphics seamlessly.
 - **Custom Date Picker Engine:** Bypasses ugly native browser inputs with a fully custom, interactive calendar dropdown built in Vanilla JS.
 </details>
+
+---
+
+## 🛠️ Feature Deep-Dive
+
+We don't just list features; we build them right. Here is exactly how some of the most advanced capabilities of CYPHER-HR work under the hood.
+
+### 📈 Bulk Employee Onboarding (Excel & CSV)
+Manually typing out 100 new hires is a nightmare. CYPHER-HR includes a **Mass Import Engine**. 
+1. **The Template:** Find the `CYPHER_HR_Employee_Template.csv` file located directly in the repository root. Open it in Microsoft Excel, Google Sheets, or Apple Numbers.
+2. **The Formatting:** Just fill out `first_name`, `last_name`, `email`, and `password`. The system is smart enough to handle missing optional fields (like department or phone).
+3. **The Engine:** Go to the Admin Dashboard -> Employees -> Click **Import Employees**. Upload your spreadsheet. 
+4. **Client-Side Parsing:** Using the blazing-fast `SheetJS` library via CDN, the dashboard parses the entire Excel file directly in your browser. This means zero lag and zero heavy lifting for your backend server!
+5. **Smart Skip:** If you accidentally upload an employee who already exists, the backend intelligently skips the duplicate email without crashing the rest of the batch.
+
+### 🌗 Global Dark Mode
+A true corporate system respects your eyes during late-night shifts. 
+- **Not just a theme:** The dark mode toggle actively shifts the entire CSS variable hierarchy (`--bg`, `--surface`, `--text`). 
+- **Persistent State:** Your preference is automatically saved to your browser's `localStorage`. Next time you boot up the dashboard, it remembers if you prefer light or dark mode.
+
+### 📄 PDF Reporting Engine
+Instead of just handing you raw data, CYPHER-HR creates beautiful, structured PDF documents.
+- **Powered by jsPDF:** Using `jsPDF` and `jspdf-autotable`, the frontend takes your filtered leave requests and dynamically draws a professional PDF document.
+- **Custom Headers:** The PDF automatically injects the current timestamp, the applied filters, and draws corporate-style tables that you can immediately send to payroll or management.
+
+### 🌍 Local Area Network (LAN) Ready
+CYPHER-HR isn't just stuck on `localhost`. The backend Express server is explicitly bound to `0.0.0.0`, meaning it is instantly accessible to anyone on your local network out-of-the-box. Spin it up on a spare office computer, and your entire HR department can securely connect via the host's local IP address without any complex reverse-proxy setup.
 
 <br />
 
@@ -145,6 +173,7 @@ Want to modify the code? Here is exactly what every file in the project does:
 | **`employee.js`** | The employee portal. Renders personalized stat cards, leave allowance progress bars, and handles the logic for submitting new time-off requests. |
 | **`reports.js`** | The reporting UI controller. It manages the complex filtering forms, queries the API with URL parameters, and renders the data tables. |
 | **`pdf_reports.js`** | The specialized PDF export engine. It takes JSON data from `reports.js`, configures document layouts, creates custom headers, and utilizes `jspdf-autotable` to draw perfectly aligned tables before initiating a browser download. |
+| **`Add_bulk_employees.js`** | The Excel/CSV parsing engine. Hooks into the Admin portal, manages the file upload modal, parses spreadsheets locally using SheetJS, and shoots JSON payloads to the backend for mass insertion. |
 
 <br />
 

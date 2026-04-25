@@ -109,7 +109,10 @@ const Admin = {
       return `
         <div class="content-header">
           <div class="search-box">${icon('search',18)}<input type="text" placeholder="Search employees..." oninput="Admin.filterEmployees(this.value)"></div>
-          <button class="btn btn-primary" onclick="Admin.showAddEmployee()">${icon('plus',18)} Add Employee</button>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline" onclick="AddBulkEmployees.showModal()">${icon('download',18)} Import Employees</button>
+            <button class="btn btn-primary" onclick="Admin.showAddEmployee()">${icon('plus',18)} Add Employee</button>
+          </div>
         </div>
         <div class="employees-grid" id="employeesGrid">
           ${employees.length === 0 ? '<p class="empty-state">No employees yet. Add your first employee!</p>' :

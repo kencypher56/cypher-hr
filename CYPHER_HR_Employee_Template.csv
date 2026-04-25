@@ -1,0 +1,4 @@
+first_name,last_name,email,password,department,position,phone
+John,Doe,john.doe@company.com,password123,IT,Developer,1234567890
+Jane,Smith,jane.smith@company.com,password123,HR,Manager,0987654321
+Alex,Johnson,alex.j@company.com,password123,Sales,Executive,5551234567

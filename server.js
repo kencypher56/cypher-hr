@@ -183,6 +183,51 @@ app.post('/api/employees', authMiddleware, adminOnly, async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+app.post('/api/employees/bulk', authMiddleware, adminOnly, async (req, res) => {
+  try {
+    const { employees } = req.body;
+    if (!Array.isArray(employees)) return res.status(400).json({ error: 'Invalid payload format' });
+    
+    let inserted = 0;
+    let skipped = 0;
+    const colors = ['#6366f1','#8b5cf6','#ec4899','#f43f5e','#14b8a6','#f97316','#06b6d4','#84cc16','#eab308'];
+    const now = new Date();
+    const policies = await query('SELECT id,monthly_limit FROM leave_policies WHERE is_enabled=true');
+
+    for (const emp of employees) {
+      if (!emp.email || !emp.password || !emp.first_name || !emp.last_name) {
+        skipped++;
+        continue;
+      }
+      
+      const exists = await query('SELECT id FROM users WHERE email=$1', [emp.email.toLowerCase()]);
+      if (exists.rowCount > 0) {
+        skipped++;
+        continue;
+      }
+      
+      const hashed = await bcrypt.hash(emp.password, 12);
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      const r = await query(
+        "INSERT INTO users(email,password,first_name,last_name,role,department,position,phone,avatar_color) VALUES($1,$2,$3,$4,'employee',$5,$6,$7,$8) RETURNING id",
+        [emp.email.toLowerCase(), hashed, emp.first_name, emp.last_name, emp.department || null, emp.position || null, emp.phone || null, color]
+      );
+      
+      const userId = r.rows[0].id;
+      
+      for (const p of policies.rows) {
+        await query('INSERT INTO leave_balances(user_id,leave_policy_id,balance,month,year) VALUES($1,$2,$3,$4,$5) ON CONFLICT DO NOTHING',
+          [userId, p.id, p.monthly_limit, now.getMonth()+1, now.getFullYear()]);
+      }
+      
+      inserted++;
+    }
+    
+    res.json({ inserted, skipped });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 app.delete('/api/employees/:id', authMiddleware, adminOnly, async (req, res) => {
   try {
     await query('DELETE FROM users WHERE id=$1 AND role=$2', [req.params.id, 'employee']);
