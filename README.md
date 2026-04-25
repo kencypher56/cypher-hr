@@ -106,6 +106,16 @@ The application utilizes a **Vanilla SPA (Single Page Application)** architectur
 
 <br />
 
+### 🐘 Why PostgreSQL?
+
+Because it's the absolute GOAT 🐐 of databases. 
+
+Honestly, I just love it. It's fully cross-platform (meaning it runs on my toaster if I want it to), but the real reason? **The terminal.** 
+
+Who needs clunky, bloated GUI wrappers taking up RAM when you can just drop into the `psql` shell, type raw SQL like a 90s movie hacker, and feel like an absolute Gigachad? 🗿 `psql` supremacy all the way.
+
+<br />
+
 ### 📂 Detailed File Guide
 
 Want to modify the code? Here is exactly what every file in the project does:
