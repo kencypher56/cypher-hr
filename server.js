@@ -391,7 +391,7 @@ async function start() {
       const now = new Date();
       if (now.getDate() === 1 && now.getHours() === 0) await resetMonthlyBalances();
     }, 3600000);
-    app.listen(PORT, () => console.log(`CYPHER-HR running on http://localhost:${PORT}`));
+    app.listen(PORT, '0.0.0.0', () => console.log(`CYPHER-HR running on http://0.0.0.0:${PORT}`));
   } catch (err) { console.error('Failed to start:', err); process.exit(1); }
 }
 

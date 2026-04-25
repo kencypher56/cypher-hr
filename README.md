@@ -201,7 +201,7 @@ node server.js
 The console will confirm: `[CYPHER-HR] Server active on port 5200` and `[CYPHER-HR] Database connected`.
 
 ### Step 6: Initial Setup Wizard
-1. Open your web browser and navigate to **`http://localhost:5200`**.
+1. Open your web browser and navigate to **`http://0.0.0.0:5200`** (or your server's IP address).
 2. Because it is the first time running the system, CYPHER-HR will automatically present the **System Setup Wizard**.
 3. Follow the UI prompts to configure your company details and create your Master Administrator account.
 4. Log in and begin adding your employees!
