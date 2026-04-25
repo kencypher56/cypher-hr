@@ -109,19 +109,16 @@ A true corporate system respects your eyes during late-night shifts.
 - **Not just a theme:** The dark mode toggle actively shifts the entire CSS variable hierarchy (`--bg`, `--surface`, `--text`). 
 - **Persistent State:** Your preference is automatically saved to your browser's `localStorage`. Next time you boot up the dashboard, it remembers if you prefer light or dark mode.
 
-### 📄 PDF Reporting Engine
-Instead of just handing you raw data, CYPHER-HR creates beautiful, structured PDF documents.
-- **Powered by jsPDF:** Using `jsPDF` and `jspdf-autotable`, the frontend takes your filtered leave requests and dynamically draws a professional PDF document.
-- **Custom Headers:** The PDF automatically injects the current timestamp, the applied filters, and draws corporate-style tables that you can immediately send to payroll or management.
-
-### 🌍 Local Area Network (LAN) Ready
-CYPHER-HR isn't just stuck on `localhost`. The backend Express server is explicitly bound to `0.0.0.0`, meaning it is instantly accessible to anyone on your local network out-of-the-box. Spin it up on a spare office computer, and your entire HR department can securely connect via the host's local IP address without any complex reverse-proxy setup.
+### 🗓️ Interactive Leave Workflow
+A complete end-to-end system for managing employee time off with full transparency.
+- **For Employees:** Easily keep track of your leave balances, submit detailed applications, and instantly see what remarks HR left when they approved or rejected your request.
+- **For HR:** A centralized dashboard to effortlessly approve or disapprove requests, leave feedback for the employee, and seamlessly keep track of all team leaves without manual spreadsheets.
 
 <br />
 
 ---
 
-## 🏗️ Deep-Dive Architecture
+## 🏗️ Deep-Dive Architecture & Tech Stack
 
 The application utilizes a **Vanilla SPA (Single Page Application)** architecture on the frontend, communicating with a **Node.js/Express** REST API, backed by a fully normalized **PostgreSQL** database. 
 
@@ -130,6 +127,7 @@ The application utilizes a **Vanilla SPA (Single Page Application)** architectur
   <img src="https://img.shields.io/badge/Frontend-Vanilla_JS_%2B_DOM_API-yellow?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Backend-Node_Express-green?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Database-PostgreSQL-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/PDF_Engine-jsPDF_%2B_AutoTable-red?style=for-the-badge" />
 </div>
 
 <br />
