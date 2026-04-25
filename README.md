@@ -18,6 +18,7 @@
   <img src="https://img.shields.io/badge/Node.js-v16%2B-green?style=for-the-badge&logo=node.js" alt="Node JS" />
   <img src="https://img.shields.io/badge/PostgreSQL-v12%2B-informational?style=for-the-badge&logo=postgresql" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/Vanilla_JS-100%25-yellow?style=for-the-badge&logo=javascript" alt="Vanilla JS" />
+  <img src="https://img.shields.io/badge/@thesvg/icons-Integrated-orange?style=for-the-badge&logo=npm" alt="@thesvg/icons NPM Package" />
 </p>
 
 ---
